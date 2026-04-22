@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}Camouflage Detection{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header>
+    <div class="logo">Camouflage Object Detection</div>
+    <nav>
+        <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+        <a href="/model_info" class="{% if request.path == '/model_info' %}active{% endif %}">Model & Data</a>
+        <a href="/predict" class="{% if request.path == '/predict' %}active{% endif %}">Prediction</a>
+        <a href="/performance" class="{% if request.path == '/performance' %}active{% endif %}">Performance</a>
+    </nav>
+</header>
+<main>
+{% block content %}{% endblock %}
+</main>
+<footer>
+<p>YOLOv11 Camouflage Detection Framework</p>
+</footer>
+</body>
+</html>

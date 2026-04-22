@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Military Object Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<h1>Object Detection System</h1>
+<form method="POST" enctype="multipart/form-data" class="upload-form">
+    <input type="file" name="image" required>
+    <button type="submit">Predict</button>
+</form>
+{% if uploaded_image and predicted_image %}
+<div class="image-container">
+    <div class="card">
+        <h3>Uploaded Image</h3>
+        <img src="{{ uploaded_image }}">
+    </div>
+    <div class="card">
+        <h3>Predicted Output</h3>
+        <img src="{{ predicted_image }}">
+    </div>
+</div>
+{% endif %}
+</body>
+</html>

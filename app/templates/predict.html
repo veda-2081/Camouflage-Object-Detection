@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block title %}Object Detection{% endblock %}
+{% block content %}
+<section class="upload-section">
+    <div class="container">
+        <h2>Object Detection</h2>
+        <p style="color:#555; font-size:18px; margin-bottom:30px;">
+            Upload one or more images to run YOLO object detection. Get instant results with bounding boxes and confidence scores.
+        </p>
+
+        <div class="detection-wrapper">
+            <div class="upload-box">
+                <div class="box-header">
+                    <h3>Upload Image</h3>
+                </div>
+                <form method="POST"
+                      action="{{ url_for('main.predict') }}"
+                      enctype="multipart/form-data"
+                      id="uploadForm">
+                    <label for="fileInput" class="upload-area">
+                        <div class="upload-icon">⬆</div>
+                        <p class="upload-text">Choose image(s)</p>
+                        <span class="upload-format">
+                            JPG, PNG, GIF, WEBP (Max 10MB each)
+                        </span>
+                        <input
+                            type="file"
+                            name="images"
+                            id="fileInput"
+                            hidden
+                            accept="image/*"
+                            multiple
+                            required>
+                    </label>
+                    <div class="file-preview" id="filePreview">
+                        <div class="preview-header">
+                            <span class="preview-icon">📄</span>
+                            <span class="preview-count">0 files selected</span>
+                        </div>
+                        <div class="file-list" id="fileList"></div>
+                    </div>
+                    <button type="submit" class="detect-btn">
+                        <span class="btn-text">Run Detection</span>
+                    </button>
+
+                </form>
+            </div>
+            {% if results %}
+            <div class="result-box" id="resultBox">
+                <div class="box-header">
+                    <h3>Detection Results</h3>
+                </div>
+                <div class="result-content">
+                    {% for r in results %}
+                    <div class="result-card">
+                        <img src="{{ r.image }}" class="result-img" alt="Detected Image">
+                        <div class="detection-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Detected Objects</span>
+                                <span class="stat-value">{{ r.count }}</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Confidence Score</span>
+                                {% set conf = r.confidence / 100 %}
+<span class="stat-value 
+{% if conf > 0.80 %}
+conf-high
+{% elif conf > 0.60 %}
+conf-medium
+{% else %}
+conf-low
+{% endif %}
+">
+{{ r.confidence }}%
+</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+<script>
+const fileInput = document.getElementById("fileInput");
+const filePreview = document.getElementById("filePreview");
+const fileList = document.getElementById("fileList");
+const resultBox = document.getElementById("resultBox");
+fileInput.addEventListener("change", function(e){
+    const files = e.target.files;
+    if(files.length > 0){
+        let listHTML = "";
+        let showNames = files.length <= 5;
+        for(let i=0; i<files.length; i++){
+            if(showNames){
+                listHTML += `
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <span class="file-name">${files[i].name}</span>
+                        <span class="file-size">${formatFileSize(files[i].size)}</span>
+                    </div>
+                `;
+            }
+        }
+
+        fileList.innerHTML = listHTML;
+        filePreview.querySelector(".preview-count").textContent =
+            files.length + " file(s) selected";
+
+        filePreview.classList.add("active");
+    }
+    else{
+        fileList.innerHTML = "";
+        filePreview.querySelector(".preview-count").textContent =
+            "0 files selected";
+        filePreview.classList.remove("active");
+    }
+});
+document.getElementById("uploadForm").addEventListener("submit", function(e){
+    if(fileInput.files.length === 0){
+        e.preventDefault();
+        alert("Please select at least one image to upload.");
+    }
+});
+function formatFileSize(bytes){
+    if(bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const sizes = ["Bytes","KB","MB","GB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+}
+window.addEventListener("load", function(){
+    const results = document.querySelector(".result-content");
+    if(results && results.children.length > 0){
+        resultBox.style.display = "block";
+    }
+});
+</script>
+{% endblock %}

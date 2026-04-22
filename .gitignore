@@ -1,0 +1,10 @@
+uploads/
+*.csv
+__pycache__/
+*.pyc
+.env
+venv/
+node_modules/
+datasets/
+*.pt
+*.weights

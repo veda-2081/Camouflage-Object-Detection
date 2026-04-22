@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section class="hero">
+<div class="hero-text">
+<h1>Deep Learning-Based Object Recognition for Military Surveillance Systems</h1>
+<p>
+Advanced YOLOv11-powered AI system for detecting camouflaged military
+personnel in complex environments. Real-time inference with precision and speed.
+</p>
+<div class="hero-buttons">
+<a href="/predict" class="btn-primary">Try Detection</a>
+<a href="/model_info" class="btn-outline">Learn More</a>
+</div>
+</div>
+<div class="hero-image">
+<img src="{{ url_for('static', filename='images/1.jpeg') }}">
+</div>
+</section>
+<section class="info-section">
+<div class="accordion-container">
+<div class="accordion-item">
+<button class="accordion-btn">
+<span>How to Use the Application</span>
+<span class="icon">+</span>
+</button>
+<div class="accordion-content">
+<p>1. Click the <b>Try Detection</b> button.</p>
+<p>2. Upload one or multiple images using <b>Choose File</b>.</p>
+<p>3. Click <b>Detect Objects</b>.</p>
+<p>4. The system processes the images using multiple YOLO detection models.</p>
+<p>5. Detection results will appear below the uploaded images.</p>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-btn">
+<span>System Overview</span>
+<span class="icon">+</span>
+</button>
+<div class="accordion-content">
+<p>
+This project presents a deep learning–based object detection system designed for recognizing camouflaged military objects in complex battlefield environments. Traditional surveillance systems often fail to detect objects that blend with their surroundings such as forests, deserts, or snowy terrain. To address this challenge, the proposed system uses advanced computer vision techniques and multiple YOLOv11-based models to accurately identify and locate objects even when they are partially hidden or camouflaged. The framework is capable of processing one or multiple images uploaded by the user and performs real-time inference to detect objects such as military vehicles, UAVs, and personnel. By combining specialized detection models trained on different datasets, the system improves accuracy and robustness in challenging conditions. The results are displayed visually with bounding boxes around detected objects, allowing users to easily interpret the output. This approach can be useful in applications such as military surveillance, border security, autonomous monitoring systems, and research in advanced computer vision for camouflage detection.
+</p>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-btn">
+<span>Project Team</span>
+<span class="icon">+</span>
+</button>
+<div class="accordion-content">
+<p><b>Team Members</b></p>
+<p>Gaddipati Vedasri Lakshmi – Model Training</p>
+<p>Annadi Spoorthi Reddy – Data Analysis</p>
+<p>Kosaraju Joshitha – Deployment & UI Development</p>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-btn">
+<span>Contact Us</span>
+<span class="icon">+</span>
+</button>
+<div class="accordion-content">
+<p>If you have any questions, suggestions, or feedback regarding the project, feel free to reach out to our team.</p>
+<p><b>Email</b></p>
+<p>
+<a href="mailto:22wh1a05d5@bvrithyderabad.edu.in">
+22wh1a05d5@bvrithyderabad.edu.in
+</a>
+</p>
+<p><b>BVRIT HYDERABAD College of Engineering for Women</b></p>
+<p>Department of Computer Science and Engineering</p>
+</div>
+</div>
+</div>
+</section>
+<script>
+document.querySelectorAll(".accordion-btn").forEach(button => {
+button.addEventListener("click", () => {
+const item = button.parentElement;
+const icon = button.querySelector(".icon");
+item.classList.toggle("active");
+icon.textContent = item.classList.contains("active") ? "−" : "+";
+});
+});
+</script>
+{% endblock %}

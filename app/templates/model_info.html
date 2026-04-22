@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}Model Information{% endblock %}
+{% block content %}
+    <main class="model-page">
+        <section class="model-used-section">
+            <h3>Model Used</h3>
+            <div class="model-container">
+                <div class="model-box">
+                    <h3>YOLOv11</h3>
+                    <p class="model-description">
+                        The proposed system uses the YOLOv11 deep learning architecture to detect camouflaged military objects in complex environments. 
+                        The input image first undergoes pre-processing steps such as resizing, normalization, and RGB conversion before being passed to the neural network. 
+                        The backbone network based on CSPNet extracts spatial features from the image. The PAN/FPN neck combines multi-scale features to improve detection of small or distant objects. 
+                        The detection head then predicts bounding boxes, object classes, and confidence scores. Finally, Non-Maximum Suppression (NMS) removes duplicate detections to produce the final output. 
+                        The detected objects are displayed in the Flask web interface with bounding boxes around them.
+                    </p>
+                </div>
+            </div>
+        </section>
+            <div class="table-wrapper">
+                <h3>YOLOv11 Configuration Overview</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Component</th>
+                            <th scope="col">Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Architecture</td>
+                            <td>YOLOv11n</td>
+                        </tr>
+                        <tr>
+                            <td>Input Resolution</td>
+                            <td>640 × 640 pixels</td>
+                        </tr>
+                        <tr>
+                            <td>Backbone</td>
+                            <td>CSPNet</td>
+                        </tr>
+                        <tr>
+                            <td>Pre-trained Dataset</td>
+                            <td>COCO Dataset</td>
+                        </tr>
+                        <tr>
+                            <td>Training Dataset</td>
+                            <td>Military Assets Dataset</td>
+                        </tr>
+                        <tr>
+                            <td>Training Epochs</td>
+                            <td>100 epochs</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="datasets-section">
+            <h3>Datasets Used</h3>
+            <div class="model-grid">
+                <div class="model-card">
+                    <h3>Military Assets Dataset</h3>
+                    <p>Contains images of tanks, artillery, and battlefield equipment for military object detection.</p>
+                </div>
+                <div class="model-card">
+                    <h3>UAV Detection Dataset</h3>
+                    <p>Collection of drone and unmanned aerial vehicle images for aerial surveillance tasks.</p>
+                </div>
+                <div class="model-card">
+                    <h3>MUDCADX Dataset</h3>
+                    <p>Specialized deep learning dataset designed for camouflage object detection.</p>
+                </div>
+                <div class="model-card">
+                    <h3>VISD Surveillance Dataset</h3>
+                    <p>Visual surveillance dataset for detecting military objects in complex scenes.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="dataset-section">
+            <h3>Dataset Information</h3>
+            <p>
+                The model is trained using a custom dataset specifically designed for detecting camouflaged military soldiers and objects. 
+                The dataset contains images collected from multiple environments including forests, deserts, and natural landscapes where camouflage is commonly used. 
+                Each image is annotated using the YOLO format with bounding box coordinates and class labels. 
+                The dataset includes variations in lighting conditions, object sizes, and backgrounds to improve the robustness of the detection system. 
+                The dataset is divided into training and validation sets to evaluate model performance during training and ensure accurate detection in real-world scenarios.
+            </p>
+            
+            <div class="model-image">
+                <img src="{{ url_for('static', filename='images/3.jpg') }}" 
+                     alt="Dataset Sample Images">
+            </div>
+            <div class="table-wrapper">
+                <h3>Dataset Summary Statistics</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Statistic</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Context</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dataset Type</td>
+                            <td>Custom Camouflaged Military Dataset</td>
+                            <td>Used for camouflage detection</td>
+                        </tr>
+                        <tr>
+                            <td>Annotation Format</td>
+                            <td>YOLOv11 Format</td>
+                            <td>Bounding box labels</td>
+                        </tr>
+                        <tr>
+                            <td>Image Format</td>
+                            <td>JPG</td>
+                            <td>Standard image format</td>
+                        </tr>
+                        <tr>
+                            <td>Training Split</td>
+                            <td>Training Set</td>
+                            <td>Used for model learning</td>
+                        </tr>
+                        <tr>
+                            <td>Validation Split</td>
+                            <td>Validation Set</td>
+                            <td>Used for model evaluation</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+{% endblock %}

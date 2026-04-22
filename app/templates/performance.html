@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block title %}Performance{% endblock %}
+{% block content %}
+<section class="model-page">
+<div class="model-container">
+<div class="model-box">
+<h2>Model Performance</h2>
+<p>
+Our multi-model YOLO ensemble improves detection accuracy
+in challenging camouflage environments across multiple
+terrain-based datasets.
+</p>
+<h2>Training Performance Statistics</h2>
+<p>
+The following results summarize the detection performance of
+different YOLO architectures trained on camouflage and military
+object detection datasets.
+</p>
+<div class="table-wrapper">
+<table class="data-table">
+<thead>
+<tr>
+<th>Model</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>mAP@0.5</th>
+<th>mAP@0.5:0.95</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YOLOv5</td>
+<td>0.405</td>
+<td>0.386</td>
+<td>0.313</td>
+<td>0.169</td>
+</tr>
+<tr>
+<td>YOLOv8</td>
+<td>0.528</td>
+<td>0.398</td>
+<td>0.396</td>
+<td>0.247</td>
+</tr>
+
+<tr>
+<td><strong>YOLOv11</strong></td>
+<td><strong>0.704</strong></td>
+<td><strong>0.542</strong></td>
+<td><strong>0.594</strong></td>
+<td><strong>0.408</strong></td>
+</tr>
+
+<tr>
+<td>YOLOv26</td>
+<td>0.565</td>
+<td>0.450</td>
+<td>0.467</td>
+<td>0.302</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<p>
+Among all models, <strong>YOLOv11 achieved the highest detection performance</strong>,
+showing superior precision and mAP scores when trained on camouflage and
+military detection datasets.
+</p>
+<div class="model-image" style="text-align:center;">
+    <img src="{{ url_for('static', filename='images/5.jpeg') }}" 
+         alt="Plot" 
+         style="width:700px; height:auto;">
+</div>
+
+        <section class="dataset" id="training">
+            <div class="container">
+                <h2>Training Metrics</h2>
+                <p>
+                    The model was trained with careful monitoring of loss functions across 100 epochs. Early stopping
+                    with a patience of 50 epochs was implemented to prevent overfitting and ensure optimal generalization.
+                </p>
+            </div>
+        </section>
+        <section class="model-architecture" id="capabilities">
+            <div class="container">
+                <h2>Model Capabilities</h2>
+                <p>
+                    The fine-tuned YOLOv8n model demonstrates strong performance in detecting camouflaged military
+                    soldiers with the following capabilities:
+                </p>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--spacing-xs); color: var(--color-text);">Detection Capabilities</h3>
+                        <thead>
+                            <tr>
+                                <th scope="col">Feature</th>
+                                <th scope="col">Capability</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Real-time Detection</strong></td>
+                                <td>Fast inference suitable for real-time applications</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Camouflage Handling</strong></td>
+                                <td>Specialized for detecting soldiers in camouflage patterns</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Density Estimation</strong></td>
+                                <td>Counts and estimates soldier density in images</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Confidence Thresholding</strong></td>
+                                <td>Configurable confidence threshold (default: 0.5)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bounding Box Localization</strong></td>
+                                <td>Precise bounding box coordinates for each detection</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Image Resolution</strong></td>
+                                <td>Optimized for 640x640 pixel input images</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section class="dataset" id="evaluation">
+            <div class="container">
+                <h2>Evaluation Methodology</h2>
+                <p>
+                    The model performance was evaluated using standard object detection metrics on a held-out validation set.
+                    The evaluation process includes:
+                </p>
+                <ul class="evaluation-list">
+                    <li><strong>Validation Set Testing:</strong> Model evaluated on separate validation images not seen during training</li>
+                    <li><strong>Confusion Matrix Analysis:</strong> Normalized confusion matrix generated to understand classification performance</li>
+                    <li><strong>Learning Curve Analysis:</strong> Training and validation losses monitored to ensure proper convergence</li>
+                    <li><strong>Best Model Selection:</strong> Model checkpoint with best validation performance selected for deployment</li>
+                    <li><strong>Visual Validation:</strong> Sample validation images with predictions visualized for qualitative assessment</li>
+                </ul>
+                <div style="margin-top: var(--spacing-md);">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--spacing-xs); color: var(--color-text);">Confusion Matrix</h3>
+                    <p style="color: var(--color-text-light); font-size: 0.9rem; margin-bottom: var(--spacing-md);">
+                        The confusion matrix shows the classification performance across all 13 classes. Diagonal values represent correct predictions, 
+                        while off-diagonal values indicate misclassifications. High diagonal values for classes like military_tank (1592), 
+                        camouflage_soldier (427), and soldier (533) demonstrate strong detection capabilities.
+                    </p>
+                    <div class="model-image-container">
+                        <img src="{{ url_for('static', filename='images/6.png') }}" alt="Confusion Matrix" style="max-width:800px; width:100%; height:auto; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);">
+            </div>
+            </div>
+        </div>
+    </section>
+</div>
+</div>
+</section>
+{% endblock %}
